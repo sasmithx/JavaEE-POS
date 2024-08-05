@@ -1,0 +1,11 @@
+17:31:37.651 [http-nio-8080-exec-2] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@19b35e8e
+17:32:31.860 [http-nio-8080-exec-4] INFO  l.i.g.javaeepos.api.CustomerServlet - Customer saved successfully
+17:37:38.355 [http-nio-8080-exec-7] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@680b298
+17:39:49.702 [http-nio-8080-exec-5] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@4ecb0b84
+17:54:36.733 [http-nio-8080-exec-6] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@543f5cea
+17:55:07.149 [http-nio-8080-exec-6] INFO  l.i.g.javaeepos.api.CustomerServlet - Customer saved successfully
+17:56:48.679 [http-nio-8080-exec-1] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@1ecc5cd8
+18:06:48.948 [http-nio-8080-exec-4] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@4e12aa93
+18:06:48.948 [http-nio-8080-exec-3] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@4e12aa93
+18:07:41.071 [http-nio-8080-exec-8] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Saved Successfully
+18:12:12.683 [http-nio-8080-exec-1] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@e987529
