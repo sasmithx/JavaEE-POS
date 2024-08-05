@@ -1,4 +1,4 @@
-drop database pos;
+drop database if exists pos;
 
 create database pos;
 

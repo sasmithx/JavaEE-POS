@@ -1,20 +1,16 @@
 <configuration>
-    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
-
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name ="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-
     <appender name="File" class="ch.qos.logback.core.FileAppender">
-        <file>C:\Users\Sasa_x\Documents\INTELLIJ\JavaEE-POS/app.log</file>
+        <file>C:\Users\Sasa_x\Documents\INTELLIJ\JavaEE-POS\src\main\resources\logback\app.log\app.log</file>
         <append>true</append>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
-
     <root level="debug">
         <appender-ref ref="Console"/>
         <appender-ref ref="File"/>
