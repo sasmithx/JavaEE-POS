@@ -14,7 +14,7 @@ $("#od_btnGetDetails").click(function (){
                 alert("Order ID not found");
             }else{
                 $.ajax({
-                    url: "http://localhost:8080/postoee/orderDetails?function=getById&id="+value,
+                    url: "http://localhost:8080/app/orderDetail?function=getById&id="+value,
                     method: "get",
                     dataType: "json",
                     success: function (resp, textStatus, jqxhr) {
@@ -52,7 +52,7 @@ $("#od_btnGetDetails").click(function (){
 
 function od_findOrder(id, callback){
     $.ajax({
-        url: "http://localhost:8080/postoee/order?function=getById&id="+id,
+        url: "http://localhost:8080/app/order?function=getById&id="+id,
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqXHR){

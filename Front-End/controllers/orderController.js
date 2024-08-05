@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function generateNextOrderID() {
     $.ajax({
-        url: "http://localhost:8080/postoee/order?function=getLastId",
+        url: "http://localhost:8080/app/order?function=getLastId",
         method: "get",
         success: function (resp, textStatus, jqxhr) {
             console.log(resp);
@@ -46,7 +46,7 @@ $("#o_inputCustId").on("change",function (){
     let selectedOption = $(this).val();
 
     $.ajax({
-        url: "http://localhost:8080/postoee/customer?function=getById&id="+selectedOption,
+        url: "http://localhost:8080/app/customer?function=getById&id="+selectedOption,
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqXHR){
@@ -203,7 +203,7 @@ $("#o_btnPurchase").click(function (){
 
                     let jsonObj = JSON.stringify(orderObj);
                     $.ajax({
-                        url: "http://localhost:8080/postoee/order",
+                        url: "http://localhost:8080/app/order",
                         method: "post",
                         contentType: "application/json",
                         data: jsonObj,
@@ -297,7 +297,7 @@ function orderTblRowClicked(){
 
 function loadCustIds(){
     $.ajax({
-        url: "http://localhost:8080/postoee/customer?function=getAll",
+        url: "http://localhost:8080/app/customer?function=getAll",
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqxhr) {
@@ -318,7 +318,7 @@ function loadCustIds(){
 
 function loadItemCodes(){
     $.ajax({
-        url: "http://localhost:8080/postoee/item?function=getAll",
+        url: "http://localhost:8080/app/item?function=getAll",
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqxhr) {
@@ -337,7 +337,7 @@ function loadItemCodes(){
 
 function o_findItem(id, callback){
     $.ajax({
-        url: "http://localhost:8080/postoee/item?function=getById&id="+id,
+        url: "http://localhost:8080/app/item?function=getById&id="+id,
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqXHR){
