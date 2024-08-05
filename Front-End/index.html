@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Single Page POS</title>
+    <meta content="width=device-width initial-scale=1" name="viewport">
+    <link href="assets/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/fontawesome-free-6.4.2-web/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section id="placeOrder">
+        <header class="position-fixed top-0 w-100" style="z-index: 20">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <i class="fa-solid fa-location-crosshairs opacity-75"
+                        style="margin-right: 10px; margin-left: 10px; font-size: 2rem"></i>
+                    <h3 class="mb-0">Shop</h3>
+                    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-bs-target="#o_navbarSupportedContent" data-bs-toggle="collapse"
+                        type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="o_navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link active" href="#">Place Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Order Details</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="" style="margin-top: 100px; z-index: 10">
+            <div class="container border rounded-5 mb-5 py-4 border-secondary border-3 bg-secondary-subtle ">
+                <div class="row justify-content-center w-100 mx-auto">
+                    <div class="col-10 col-sm-5 col-md-3 mb-3 mt-3 mb-md-0">
+                        <label class="form-label" for="o_inputOrderId">Order ID:</label>
+                        <input class="form-control border-black" id="o_inputOrderId" placeholder="" type="text" disabled>
+                    </div>
+                    <div class="col-10 col-sm-5 col-md-3 mb-3 mt-3 mb-md-0">
+                        <label class="form-label" for="o_inputOrderDate">Order Date:</label>
+                        <input class="form-control border-black" id="o_inputOrderDate" placeholder="" type="date">
+                    </div>
+                    <div class="col-10 col-md-3 mb-0 mt-3">
+                        <label class="form-label" for="o_inputCustId">Customer ID:</label>
+                        <select class="form-select border-black" id="o_inputCustId">
+                        </select>
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-3">
+                        <label class="form-label text-info-emphasis">Customer Name:</label>
+                        <label class="form-label text-info-emphasis" id="o_lblCustName"></label>
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-0">
+                        <label class="form-label text-info-emphasis">Customer Contact:</label>
+                        <label class="form-label text-info-emphasis" id="o_lblCustContact"></label>
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-3">
+                        <label class="form-label" for="o_inputItmCode">Item Code:</label>
+                        <select class="form-select border-black" id="o_inputItmCode">
+                        </select>
+                    </div>
+                    <div class="col-10 col-md-6 mb-0 mt-3">
+                        <label class="form-label text-info-emphasis">Item Name:</label>
+                        <label class="form-label text-info-emphasis" id="o_lblItmName"></label>
+                    </div>
+                    <div class="col-10 col-md-3 col-sm-5 mb-0 mt-0 mt-md-3 ">
+                        <label class="form-label text-info-emphasis">Unit Price:</label>
+                        <label class="form-label text-info-emphasis" id="o_lblItmUnitPrice"></label>
+                    </div>
+                    <div class="col-10 col-md-9 col-sm-5 mb-0 mt-0">
+                        <label class="form-label text-info-emphasis">Qty left:</label>
+                        <label class="form-label text-info-emphasis" id="o_lblItmQtyLeft"></label>
+                    </div>
+                    <div class="col-10 col-md-9 mb-2 mt-3">
+                        <label class="form-label" for="o_inputOrdQty">Ordered Qty:</label>
+                        <input class="form-control border-black" id="o_inputOrdQty" min="1" placeholder="" type="number"
+                            style="width: 35%">
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-3">
+                        <button class="btn w-100 h-100 bg-danger text-white" id="btnAddToCart">Add To Cart</button>
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-3 overflow-x-scroll">
+                        <table class="table table-responsive table-hover mt-4 mb-4 table-bordered  w-100" style="" id="tblOrder">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th>Item Code</th>
+                                    <th>Item Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-light" id="o_tBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-5">
+                        <label class="form-label fs-1 text-danger">Total:</label>
+                        <label class="form-label fs-1 text-danger" id="o_lblTotal"></label>
+                    </div>
+                    <div class="col-10 col-md-9 mb-3 mt-0">
+                        <label class="form-label fs-4 text-secondary">Sub Total:</label>
+                        <label class="form-label fs-4 text-secondary" id="o_lblSubTotal"></label>
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-0">
+                        <label class="form-label" for="o_inputDiscount">Discount (%):</label>
+                        <input class="form-control w-25 border-black" id="o_inputDiscount" min="0" max="100" placeholder=""
+                            type="number">
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-4">
+                        <label class="form-label" for="o_inputCash">Cash:</label>
+                        <input class="form-control w-25 border-black" id="o_inputCash" min="0" max="100" placeholder=""
+                               type="text">
+                    </div>
+                    <div class="col-10 col-md-9 mb-0 mt-4">
+                        <label class="form-label" for="o_inputBalance">Balance:</label>
+                        <input class="form-control w-25 border-black" id="o_inputBalance" min="0" max="100" placeholder=""
+                               type="text" disabled>
+                    </div>
+                </div>
+                <div class="row w-100 mb-5 mt-5 justify-content-center mx-auto">
+                    <div class="col-10 col-md-9 text-center py-2">
+                        <button class="btn w-100 h-100 bg-success text-white" id="o_btnPurchase">Purchase</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </main>
+    </section>
+
+    <section id="items" style="display: none;">
+        <header class="position-fixed top-0 w-100" style="z-index: 20">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <i class="fa-solid fa-location-crosshairs opacity-75"
+                        style="margin-right: 10px; margin-left: 10px; font-size: 2rem"></i>
+                    <h3 class="mb-0">Shop</h3>
+                    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-bs-target="#i_navBar" data-bs-toggle="collapse"
+                        type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="i_navBar">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Place Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link active" href="#">Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Order Details</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main style="margin-top: 56px; z-index: 10">
+            <div class="accordion" id="i_accordionExample">
+                <div class="accordion-item  bg-secondary-subtle rounded-bottom-3" style="">
+                    <h2 class="accordion-header rounded-bottom-3 ">
+                        <button aria-controls="collapseOne" aria-expanded="false"
+                            class="accordion-button rounded-bottom-3 px-5 bg-secondary text-white "
+                            data-bs-target="#i_collapseOne" data-bs-toggle="collapse" type="button">
+                            Add / Update Item
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" data-bs-parent="#accordionExample" id="i_collapseOne">
+
+                        <div class="container-fluid ">
+                            <div class="row w-100 justify-content-center mx-auto mt-4">
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="inputItemCode">Item Code:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="inputItemCode" placeholder="" type="text">
+                                    <label class="text-danger mt-3 i_err-label" style="font-size: 13px; display: none">item Code is a required field. Pattern I00-000 </label>
+                                </div>
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="inputItemName">Item Name:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="inputItemName" placeholder="" type="text">
+                                    <label class="text-danger mt-3 i_err-label" style="font-size: 13px; display: none">item name is a required field. Minimum 3, Spaces allowed </label>
+                                </div>
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="inputItemUnitPrice">Unit Price:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="inputItemUnitPrice" placeholder="" type="text">
+                                    <label class="text-danger mt-3 i_err-label" style="font-size: 13px; display: none">unit price is a required field. Pattern 00.00 </label>
+                                </div>
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="inputItemQtyOnHand">Qty On Hand:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="inputItemQtyOnHand" placeholder="" type="text">
+                                    <label class="text-danger mt-3 i_err-label" style="font-size: 13px; display: none">qty on hand is a required field. Please input a valid amount </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid mt-4 w-100 mb-5 px-5" id="i_btnContainer" style="height: max-content">
+                            <div class="row w-100">
+                                <div class="col-6 col-md-4 text-center py-2">
+                                    <button class="btn w-100 h-100 btn-dark" id="i_btnSave">Save</button>
+                                </div>
+                                <div class="col-6 col-md-4 text-center py-2">
+                                    <button class="btn w-100 h-100 btn-dark" id="i_btnUpdate">Update</button>
+                                </div>
+                                <div class="col-6 col-md-4 text-center py-2">
+                                    <button class="btn w-100 h-100 btn-dark" id="i_btnDelete">Delete</button>
+                                </div>
+                                <div class="col-6 col-md-12 text-center py-2">
+                                    <button class="btn w-100 h-100"
+                                        style="background-color: grey; color: white" id="i_btnClear">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container border mt-5 rounded-5 border-success bg-secondary-subtle">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-10 mt-5">
+                        <label class=" " style="">Find Item:</label>
+                    </div>
+                    <form class="d-flex justify-content-center mt-3 gap-3" role="search">
+                        <div class="col-7 col-md-8">
+                            <input aria-label="Search" class="form-control me-2" placeholder="Search" type="search" id="i_inpSearch">
+                        </div>
+                        <div class="col-3 col-md-2">
+                            <button class="btn btn-outline-success w-100" id="i_btnSearch" >Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-hover m-auto w-75 mt-5 mb-5 table-responsive table-bordered" id="tblItem">
+                <thead>
+                    <tr class="table-dark">
+                        <th>Item Code</th>
+                        <th>Name</th>
+                        <th>Unit Price</th>
+                        <th>Qty On Hand</th>
+                    </tr>
+                </thead>
+                <tbody id="i_tBody" class="table-secondary">
+
+                </tbody>
+            </table>
+        </main>
+    </section>
+
+    <section id="customers" style="display: none;">
+        <header class="position-fixed top-0 w-100" style="z-index: 20">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <i class="fa-solid fa-location-crosshairs opacity-75"
+                        style="margin-right: 10px; margin-left: 10px; font-size: 2rem"></i>
+                    <h3 class="mb-0">Shop</h3>
+                    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-bs-target="#c_navBar" data-bs-toggle="collapse"
+                        type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="c_navBar">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Place Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link active" href="#">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Order Details</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main style="margin-top: 56px; z-index: 10">
+            <div class="accordion" id="c_accordionExample">
+                <div class="accordion-item  bg-secondary-subtle rounded-bottom-3" style="">
+                    <h2 class="accordion-header rounded-bottom-3 ">
+                        <button aria-controls="collapseOne" aria-expanded="false"
+                            class="accordion-button rounded-bottom-3 px-5 bg-secondary text-white "
+                            data-bs-target="#c_collapseOne" data-bs-toggle="collapse" type="button">
+                            Add / Update Customer
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" data-bs-parent="#accordionExample" id="c_collapseOne">
+                        <div class="container-fluid ">
+                            <div class="row w-100 justify-content-center mx-auto mt-4">
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="c_inputCustId">Customer ID:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="c_inputCustId" placeholder="" type="text">
+                                    <label class="text-danger mt-3 err-label" style="font-size: 13px; display: none">customer ID is a required field. Pattern C00-000 </label>
+                                </div>
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="c_inputCustName">Customer Name:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="c_inputCustName" placeholder="" type="text">
+                                    <label class="text-danger mt-3 err-label" style="font-size: 13px; display: none">customer name is a required field. Minimum 4, Spaces Allowed </label>
+                                </div>
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="c_inputCustAddress">Customer Address:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="c_inputCustAddress" placeholder="" type="text">
+                                    <label class="text-danger mt-3 err-label" style="font-size: 13px; display: none">customer address is a required field. Minimum 8, Spaces Allowed </label>
+                                </div>
+                                <div class="col-10 col-sm-5  mb-3 mt-3 mx-lg-3">
+                                    <label class="form-label" for="c_inputCustContact">Customer Contact:</label>
+                                    <input class="form-control border-secondary-subtle border-3 rounded-5"
+                                        id="c_inputCustContact" placeholder="" type="text">
+                                    <label class="text-danger mt-3 err-label" style="font-size: 13px; display: none">customer contact is a required field. Please input a valid contact number  </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid mt-4 w-100 mb-5 px-5" id="c_btnContainer" style="height: max-content">
+                            <div class="row w-100">
+                                <div class="col-6 col-md-4 text-center py-2">
+                                    <button class="btn w-100 h-100 btn-dark" id="c_btnSave">Save</button>
+                                </div>
+                                <div class="col-6 col-md-4 text-center py-2">
+                                    <button class="btn w-100 h-100 btn-dark" id="c_btnUpdate">Update</button>
+                                </div>
+                                <div class="col-6 col-md-4 text-center py-2">
+                                    <button class="btn w-100 h-100 btn-dark" id="c_btnDelete">Delete</button>
+                                </div>
+                                <div class="col-6 col-md-12 text-center py-2">
+                                    <button class="btn w-100 h-100" id="c_btnClear" style="background-color: grey; color: white">Clear</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container border mt-5 rounded-5 border-success bg-secondary-subtle">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-10 mt-5">
+                        <label class=" " style="">Find Customer:</label>
+                    </div>
+                    <form class="d-flex justify-content-center mt-3 gap-3" role="search">
+                        <div class="col-7 col-md-8">
+                            <input aria-label="Search" class="form-control me-2" placeholder="Search" type="search" id="c_inpSearch">
+                        </div>
+                        <div class="col-3 col-md-2">
+                            <button class="btn btn-outline-success w-100" id="c_btnSearch" >Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-hover m-auto w-75 mt-5 mb-5 table-responsive table-bordered" id="tblCustomer">
+                <thead>
+                    <tr class="table-dark">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody id="c_tBody" class="table-secondary" >
+
+                </tbody>
+            </table>
+        </main>
+    </section>
+
+    <section id="orderDetails" style="display: none;">
+        <header class="position-fixed top-0 w-100 " style="z-index: 20">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <i class="fa-solid fa-location-crosshairs opacity-75"
+                        style="margin-right: 10px; margin-left: 10px; font-size: 2rem"></i>
+                    <h3 class="mb-0">Shop</h3>
+                    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
+                        type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-4">
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Place Order</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Items</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link" href="#">Customers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a aria-current="page" class="nav-link active" href="#">Order Details</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main style="margin-top: 56px; z-index: 10" class="">
+            <div class="container border rounded-5 border-success bg-secondary-subtle" style="margin-top: 100px">
+                <div class="row justify-content-center mb-5">
+                    <div class="col-10 mt-5">
+                        <label class=" " style="">Find the Order:</label>
+                    </div>
+                    <form class="d-flex justify-content-center mt-3 gap-3" role="search">
+                        <div class="col-7 col-md-8">
+                            <input aria-label="Search" class="form-control me-2" placeholder="Enter Order ID" id="od_inputOrderId">
+                        </div>
+                        <div class="col-3 col-md-2">
+                            <button class="btn btn-outline-success w-100" id="od_btnGetDetails" >Get Details</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="container mt-5 text-center text-lg-start text-xl-center" id="od_lblContainer">
+                <div class="col-12 col-sm-5 col-lg-3 col-xl-2 mb-0 mt-2 text-center text-lg-start px-lg-3" style="display: inline-block">
+                    <label class="form-label mb-0 text-success">Order Date</label><br>
+                    <label class="form-label text-info-emphasis mt-0" id="od_lblDate"></label>
+                </div>
+                <div class="col-12 col-sm-5 col-lg-3 col-xl-2 mb-0 mt-2 text-center text-lg-start px-lg-3" style="display: inline-block">
+                    <label class="form-label mb-0 text-success">Customer ID</label><br>
+                    <label class="form-label text-info-emphasis mt-0" id="od_lblCustId"></label>
+                </div>
+                <div class="col-12 col-sm-5 col-lg-3 col-xl-2 mb-0 mt-2 text-center text-lg-start px-lg-3" style="display: inline-block">
+                    <label class="form-label mb-0 text-success">Discount</label><br>
+                    <label class="form-label text-info-emphasis mt-0" id="od_lblDiscount"></label>
+                </div>
+                <div class="col-12 col-sm-5 col-lg-3 col-xl-2 mb-0 mt-2 text-center text-lg-start px-lg-3" style="display: inline-block">
+                    <label class="form-label mb-0 text-success">Total</label><br>
+                    <label class="form-label text-info-emphasis mt-0" id="od_lbltotal"></label>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-9 mb-5 mt-3 overflow-x-scroll mx-auto" id="od_tblContainer">
+                <table class="table table-hover m-auto w-100 mt-5 table-responsive table-bordered">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Item Code</th>
+                            <th>Unit Price</th>
+                            <th>Qty</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-secondary" id="od_tBody">
+
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </section>
+
+    <script src="assets/bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="db/db.js"></script>
+    <script src="models/customer.js"></script>
+    <script src="controllers/customerController.js"></script>
+    <script src="controllers/validations/customerValidations.js"></script>
+    <script src="models/item.js"></script>
+    <script src="controllers/itemController.js"></script>
+    <script src="controllers/validations/itemValidations.js"></script>
+    <script src="models/order.js"></script>
+    <script src="controllers/orderController.js"></script>
+    <script src="controllers/validations/orderValidations.js"></script>
+    <script src="controllers/orderDetailsController.js"></script>
+    <script>
+        window.onload = function (event) {
+            let selectedSection = sessionStorage.getItem("selectedSection");
+            if (selectedSection) {
+                document.querySelectorAll("body>section").forEach(section => {
+                    section.style.display="none";
+                });
+                document.getElementById(selectedSection).style.display="block";
+            } else {
+                navigate("placeOrder");
+            }
+        };
+
+        //placeOrder
+        document.querySelector("#placeOrder>header>nav>div>div>ul>li:nth-child(2)").addEventListener(
+            "click", function () {
+                document.querySelector("#items").style.display = "block";
+                document.querySelector("#placeOrder").style.display = "none";
+                sessionStorage.setItem("selectedSection", "items");
+            }
+        );
+        document.querySelector("#placeOrder>header>nav>div>div>ul>li:nth-child(3)").addEventListener(
+            "click", function () {
+                document.querySelector("#customers").style.display = "block";
+                document.querySelector("#placeOrder").style.display = "none";
+                sessionStorage.setItem("selectedSection", "customers");
+            }
+        );
+        document.querySelector("#placeOrder>header>nav>div>div>ul>li:nth-child(4)").addEventListener(
+            "click", function () {
+                document.querySelector("#orderDetails").style.display = "block";
+                document.querySelector("#placeOrder").style.display = "none";
+                sessionStorage.setItem("selectedSection", "orderDetails");
+            }
+        );
+
+        //items
+        document.querySelector("#items>header>nav>div>div>ul>li:nth-child(1)").addEventListener(
+            "click", function () {
+                document.querySelector("#placeOrder").style.display = "block";
+                document.querySelector("#items").style.display = "none";
+                sessionStorage.setItem("selectedSection", "placeOrder");
+            }
+        );
+        document.querySelector("#items>header>nav>div>div>ul>li:nth-child(3)").addEventListener(
+            "click", function () {
+                document.querySelector("#customers").style.display = "block";
+                document.querySelector("#items").style.display = "none";
+                sessionStorage.setItem("selectedSection", "customers");
+            }
+        );
+        document.querySelector("#items>header>nav>div>div>ul>li:nth-child(4)").addEventListener(
+            "click", function () {
+                document.querySelector("#orderDetails").style.display = "block";
+                document.querySelector("#items").style.display = "none";
+                sessionStorage.setItem("selectedSection", "orderDetails");
+            }
+        );
+
+        //customers
+        document.querySelector("#customers>header>nav>div>div>ul>li:nth-child(1)").addEventListener(
+            "click", function () {
+                document.querySelector("#placeOrder").style.display = "block";
+                document.querySelector("#customers").style.display = "none";
+                sessionStorage.setItem("selectedSection", "placeOrder");
+            }
+        );
+        document.querySelector("#customers>header>nav>div>div>ul>li:nth-child(2)").addEventListener(
+            "click", function () {
+                document.querySelector("#items").style.display = "block";
+                document.querySelector("#customers").style.display = "none";
+                sessionStorage.setItem("selectedSection", "items");
+            }
+        );
+        document.querySelector("#customers>header>nav>div>div>ul>li:nth-child(4)").addEventListener(
+            "click", function () {
+                document.querySelector("#orderDetails").style.display = "block";
+                document.querySelector("#customers").style.display = "none";
+                sessionStorage.setItem("selectedSection", "orderDetails");
+            }
+        );
+
+        //orderDetails
+        document.querySelector("#orderDetails>header>nav>div>div>ul>li:nth-child(1)").addEventListener(
+            "click", function () {
+                document.querySelector("#placeOrder").style.display = "block";
+                document.querySelector("#orderDetails").style.display = "none";
+                sessionStorage.setItem("selectedSection", "placeOrder");
+            }
+        );
+        document.querySelector("#orderDetails>header>nav>div>div>ul>li:nth-child(2)").addEventListener(
+            "click", function () {
+                document.querySelector("#items").style.display = "block";
+                document.querySelector("#orderDetails").style.display = "none";
+                sessionStorage.setItem("selectedSection", "items");
+            }
+        );
+        document.querySelector("#orderDetails>header>nav>div>div>ul>li:nth-child(3)").addEventListener(
+            "click", function () {
+                document.querySelector("#customers").style.display = "block";
+                document.querySelector("#orderDetails").style.display = "none";
+                sessionStorage.setItem("selectedSection", "customers");
+            }
+        );
+
+    </script>
+</body>
+
+</html>
