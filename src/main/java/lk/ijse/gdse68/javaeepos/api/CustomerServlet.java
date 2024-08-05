@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.gdse68.javaeepos.bo.BOFactory;
 import lk.ijse.gdse68.javaeepos.bo.custom.CustomerBO;
 import lk.ijse.gdse68.javaeepos.dto.CustomerDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -26,6 +28,8 @@ public class CustomerServlet extends HttpServlet {
 
     CustomerBO customerBO = BOFactory.getBOFactory().getBO(BOFactory.BOTypes.CUSTOMER_BO);
 
+    static Logger logger = LoggerFactory.getLogger(CustomerServlet.class);
+
     DataSource connectionPool;
 
     @Override
@@ -33,8 +37,10 @@ public class CustomerServlet extends HttpServlet {
         try {
             InitialContext ic = new InitialContext();
             connectionPool = (DataSource) ic.lookup("java:/comp/env/jdbc/pos");
+            logger.debug("DB Connection Initialized: {}",connectionPool);
         } catch (NamingException e) {
             e.printStackTrace();
+            logger.error("DB Connection Initialize Failed ",e);
         }
     }
 
@@ -98,13 +104,16 @@ public class CustomerServlet extends HttpServlet {
 
             boolean isSaved = customerBO.saveCustomer(connection, customerDTO);
             if(isSaved){
+                logger.info("Customer saved successfully");
                 resp.setStatus(HttpServletResponse.SC_CREATED);
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to save customer");
             }
         } catch (SQLIntegrityConstraintViolationException e) {
+            logger.error("Customer already exists");
             resp.sendError(HttpServletResponse.SC_CONFLICT, "Duplicate values. Please check again");
         }catch (Exception e) {
+            logger.error("Error While saving Customer");
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request.");
         }
@@ -134,6 +143,7 @@ public class CustomerServlet extends HttpServlet {
 
             boolean isUpdated = customerBO.updateCustomer(connection, customerDTO);
             if(isUpdated){
+                logger.info("Customer updated successfully");
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to update customer");
@@ -142,6 +152,7 @@ public class CustomerServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_CONFLICT, "Duplicate values. Please check again");
         }catch (Exception e) {
             e.printStackTrace();
+            logger.error("Error While updating Customer");
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request.");
         }
     }
