@@ -32,7 +32,7 @@ public class ItemServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             InitialContext ic = new InitialContext();
-            connectionPool = (DataSource) ic.lookup("java:/comp/env/jdbc/eeAssignment");
+            connectionPool = (DataSource) ic.lookup("java:/comp/env/jdbc/pos");
         } catch (NamingException e) {
             e.printStackTrace();
         }

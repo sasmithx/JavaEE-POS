@@ -16,7 +16,7 @@ $("#i_btnSave").click(function() {
 
     let jsonObj = JSON.stringify(itemObj);
     $.ajax({
-        url: "http://localhost:8080/postoee/item",
+        url: "http://localhost:8080/app/item",
         method: "post",
         contentType: "application/json",
         data: jsonObj,
@@ -54,7 +54,7 @@ $("#i_btnUpdate").click(function () {
 
     let jsonObj = JSON.stringify(itemObj);
     $.ajax({
-        url: "http://localhost:8080/postoee/item",
+        url: "http://localhost:8080/app/item",
         method: "put",
         contentType: "application/json",
         data: jsonObj,
@@ -93,7 +93,7 @@ $("#i_btnSearch").click(function () {
     let itemId = $("#i_inpSearch").val().trim();
 
     $.ajax({
-        url: "http://localhost:8080/postoee/item?function=getById&id="+itemId,
+        url: "http://localhost:8080/app/item?function=getById&id="+itemId,
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqXHR){
@@ -121,7 +121,7 @@ function deleteItem(id) {
             alert("No item with the id: " + id + " found");
         } else {
             $.ajax({
-                url: "http://localhost:8080/postoee/item?id="+id,
+                url: "http://localhost:8080/app/item?id="+id,
                 method: "delete",
                 success: function (resp, textStatus, jqXHR){
                     console.log(resp);
@@ -142,7 +142,7 @@ function deleteItem(id) {
 
 function findItem(id, callback) {
     $.ajax({
-        url: "http://localhost:8080/postoee/item?function=getById&id="+id,
+        url: "http://localhost:8080/app/item?function=getById&id="+id,
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqXHR){
@@ -159,7 +159,7 @@ function getAllItems() {
     $("#i_tBody").empty();
 
     $.ajax({
-        url: "http://localhost:8080/postoee/item?function=getAll",
+        url: "http://localhost:8080/app/item?function=getAll",
         method: "get",
         dataType: "json",
         success: function (resp, textStatus, jqxhr) {
