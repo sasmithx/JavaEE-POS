@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.gdse68.javaeepos.bo.BOFactory;
 import lk.ijse.gdse68.javaeepos.bo.custom.OrderDetailBO;
 import lk.ijse.gdse68.javaeepos.dto.OrderDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,6 +25,8 @@ public class OrderDetailServlet extends HttpServlet {
 
     OrderDetailBO orderDetailsBO = BOFactory.getBOFactory().getBO(BOFactory.BOTypes.ORDER_DETAIL_BO);
 
+    static Logger logger = LoggerFactory.getLogger(OrderDetailServlet.class);
+
     DataSource connectionPool;
 
     @Override
@@ -30,6 +34,7 @@ public class OrderDetailServlet extends HttpServlet {
         try {
             InitialContext ic = new InitialContext();
             connectionPool = (DataSource) ic.lookup("java:/comp/env/jdbc/pos");
+            logger.debug("DB Connection Initialized: {}",connectionPool);
         } catch (NamingException e) {
             e.printStackTrace();
         }
@@ -48,10 +53,13 @@ public class OrderDetailServlet extends HttpServlet {
                 String json = jsonb.toJson(orderDTO);
                 resp.getWriter().write(json);
             } catch (JsonbException e) {
+                logger.error("Error while getting order details by id");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             } catch (IOException e) {
+                logger.error("Error while getting order details by id");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             } catch (Exception e) {
+                logger.error("Error while getting order details by id");
                 e.printStackTrace();
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             }

@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.gdse68.javaeepos.bo.BOFactory;
 import lk.ijse.gdse68.javaeepos.bo.custom.OrderBO;
 import lk.ijse.gdse68.javaeepos.dto.OrderDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,6 +26,8 @@ public class OrderServlet extends HttpServlet {
 
     OrderBO orderBO = BOFactory.getBOFactory().getBO(BOFactory.BOTypes.ORDER_BO);
 
+    static Logger logger = LoggerFactory.getLogger(OrderServlet.class);
+
     DataSource connectionPool;
 
     @Override
@@ -31,6 +35,7 @@ public class OrderServlet extends HttpServlet {
         try {
             InitialContext ic = new InitialContext();
             connectionPool = (DataSource) ic.lookup("java:/comp/env/jdbc/pos");
+            logger.debug("DB Connection Initialized: {}",connectionPool);
         } catch (NamingException e) {
             e.printStackTrace();
         }
@@ -45,6 +50,7 @@ public class OrderServlet extends HttpServlet {
                 String lastId = orderBO.getLastId(connection);
                 resp.getWriter().write(lastId);
             } catch (SQLException e) {
+                logger.error("Error getting last id from DB");
                 e.printStackTrace();
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             }
@@ -98,10 +104,13 @@ public class OrderServlet extends HttpServlet {
             boolean isTransactionDone = orderBO.placeOrder(connection, orderDTO);
             if(isTransactionDone){
                 resp.setStatus(HttpServletResponse.SC_CREATED);
+                logger.info("Order created");
             }else{
+                logger.error("Error While processing Transaction");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed transaction");
             }
         } catch (Exception e) {
+            logger.error("Error While processing Transaction");
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "transaction failed");
         }

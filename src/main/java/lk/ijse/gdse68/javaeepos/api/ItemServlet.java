@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lk.ijse.gdse68.javaeepos.bo.BOFactory;
 import lk.ijse.gdse68.javaeepos.bo.custom.ItemBO;
 import lk.ijse.gdse68.javaeepos.dto.ItemDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -26,6 +28,8 @@ public class ItemServlet extends HttpServlet {
 
     ItemBO itemBO = BOFactory.getBOFactory().getBO(BOFactory.BOTypes.ITEM_BO);
 
+    static Logger logger = LoggerFactory.getLogger(ItemServlet.class);
+
     DataSource connectionPool;
 
     @Override
@@ -33,6 +37,7 @@ public class ItemServlet extends HttpServlet {
         try {
             InitialContext ic = new InitialContext();
             connectionPool = (DataSource) ic.lookup("java:/comp/env/jdbc/pos");
+            logger.debug("DB Connection Initialized: {}",connectionPool);
         } catch (NamingException e) {
             e.printStackTrace();
         }
@@ -50,6 +55,7 @@ public class ItemServlet extends HttpServlet {
                 String json = jsonb.toJson(customerDTOList);
                 resp.getWriter().write(json);
             } catch (JsonbException e) {
+                logger.error("Error while converting to Jsonb", e);
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             } catch (IOException e) {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
@@ -83,15 +89,19 @@ public class ItemServlet extends HttpServlet {
             System.out.println(itemDTO);
 
             if(itemDTO.getCode()==null || !itemDTO.getCode().matches("^(I00-)[0-9]{3}$")){
+                logger.error("item code is empty or invalid");
                 resp.getWriter().write("item code is empty or invalid");
                 return;
             }else if(itemDTO.getName()==null || !itemDTO.getName().matches("^.{3,}$")){
+                logger.error("item name is empty or invalid");
                 resp.getWriter().write("name is empty or invalid");
                 return;
             }else if(itemDTO.getPrice()==null || !itemDTO.getPrice().toString().matches("\\d+(\\.\\d{1,2})")){
+                logger.error("item price is empty or invalid");
                 resp.getWriter().write("address is empty or invalid");
                 return;
             }else if(String.valueOf(itemDTO.getQty())==null || !String.valueOf(itemDTO.getQty()).matches("^\\d+(\\.\\d{1,2})?$")){
+                logger.error("item qty is empty or invalid");
                 resp.getWriter().write("contact is empty or invalid");
                 return;
             }
@@ -99,12 +109,15 @@ public class ItemServlet extends HttpServlet {
             boolean isSaved = itemBO.saveCustomer(connection, itemDTO);
             if(isSaved){
                 resp.setStatus(HttpServletResponse.SC_CREATED);
+                logger.info("Item Saved Successfully");
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to add item");
             }
         } catch (SQLIntegrityConstraintViolationException e) {
+            logger.error("Item Already Exists");
             resp.sendError(HttpServletResponse.SC_CONFLICT, "Duplicate values. Please check again");
         }catch (Exception e) {
+            logger.error("Error While Saving Item");
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request.");
         }
@@ -119,28 +132,36 @@ public class ItemServlet extends HttpServlet {
             System.out.println(itemDTO);
 
             if(itemDTO.getCode()==null || !itemDTO.getCode().matches("^(I00-)[0-9]{3}$")){
+                logger.error("item code is empty or invalid");
                 resp.getWriter().write("item code is empty or invalid");
                 return;
             }else if(itemDTO.getName()==null || !itemDTO.getName().matches("^[A-Za-z ]{4,}$")){
+                logger.error("item name is empty or invalid");
                 resp.getWriter().write("name is empty or invalid");
                 return;
             }else if(itemDTO.getPrice()==null || !itemDTO.getPrice().toString().matches("\\d+(\\.\\d{1,2})")){
-                resp.getWriter().write("address is empty or invalid");
+                logger.error("item price is empty or invalid");
+                resp.getWriter().write("price is empty or invalid");
                 return;
             }else if(String.valueOf(itemDTO.getQty())==null || !String.valueOf(itemDTO.getQty()).matches("^\\d+(\\.\\d{1,2})?$")){
-                resp.getWriter().write("contact is empty or invalid");
+                logger.error("item qty is empty or invalid");
+                resp.getWriter().write("qty is empty or invalid");
                 return;
             }
 
             boolean isUpdated = itemBO.updateItem(connection, itemDTO);
             if(isUpdated){
+                logger.info("Item Updated Successfully");
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }else{
+                logger.error("Error While Updating Item");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to update item details");
             }
         }catch (SQLIntegrityConstraintViolationException e) {
+            logger.error("Item Already Exists");
             resp.sendError(HttpServletResponse.SC_CONFLICT, "Duplicate values. Please check again");
         }catch (Exception e) {
+            logger.error("An error occurred while processing the request");
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing the request.");
         }
@@ -152,8 +173,10 @@ public class ItemServlet extends HttpServlet {
         try (Connection connection = connectionPool.getConnection()){
             boolean isDeleted = itemBO.removeItem(connection, id);
             if(isDeleted){
+                logger.info("Item Deleted Successfully");
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }else{
+                logger.error("Error While Deleting Item");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to remove item");
             }
         } catch (Exception e) {
