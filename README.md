@@ -31,7 +31,8 @@ The application follows a layered architecture comprising the following layers:
 
 **3.** **Data Access Layer:** Handles direct interactions with the database.
 
-## Setup and Configuration
+
+## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Keyboard.png" style="width: 50px; height: 50px;" alt="">Setup and Configuration
 
 ### Prerequisites
 
