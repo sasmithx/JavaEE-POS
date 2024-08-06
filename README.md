@@ -59,41 +59,5 @@ The application follows a layered architecture comprising the following layers:
 - **ERROR:** Error events that might still allow the application to continue running.
 
  
-## Architecture Overview
-
-The application follows a layered architecture comprising the following layers:
-
-**1.** **Presentation Layer:** Manages the user interface and client-side interactions.
-
-**2.** **Business Logic Layer:** Contains the core functionality and business rules.
-
-**3.** **Data Access Layer:** Handles direct interactions with the database.
-
-
-## <img src="https://user-images.githubusercontent.com/74038190/216122028-c05b52fb-983e-4ee8-8811-6f30cd9ea5d5.png" style="width: 50px; height: 50px;" alt="">Setup and Configuration
-
-### Prerequisites
-
-- **JDK 21**
-- **Jakarta EE compatible application server (e.g., Tomcat,WildFly, GlassFish)**
-- **MySQL server**
-- **Maven**
-
-## Database Configuration
-
-**1.Create a MySQL database.**
-
-**2.Configure JNDI for database connectivity:**
-- Define a JNDI resource in your application server's configuration.
-
-- Example configuration for Tomcat:
-
-
-## Logging
-
-- **DEBUG:** Fine-grained information for debugging.
-- **INFO:** General information about application progress.
-- **WARN:** Potentially harmful situations.
-- **ERROR:** Error events that might still allow the application to continue running.
 
  
