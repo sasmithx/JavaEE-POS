@@ -41,6 +41,12 @@ The application follows a layered architecture comprising the following layers:
 - **MySQL server**
 - **Maven**
 
+### Clone the repository:
+
+```bash
+  git clone https://github.com/sasmithx/JavaEE-POS.git
+```  
+
 ## <img src="https://user-images.githubusercontent.com/74038190/216122003-1c7d9078-357a-47f5-81c7-1c4f2552e143.png" style="width: 50px; height: 50px;" alt=""> Database Configuration
 
 **1.Create a MySQL database.**
