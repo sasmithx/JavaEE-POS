@@ -49,9 +49,7 @@ The application follows a layered architecture comprising the following layers:
 
 - Example configuration for Tomcat:
 
-
-
-
+<img src="https://github.com/sasmithx/JavaEE-POS/blob/main/Screenshot/xml.png" width="600px" height="auto">
 
 ## Logging
 
