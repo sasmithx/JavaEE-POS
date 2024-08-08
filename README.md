@@ -65,6 +65,11 @@ The application follows a layered architecture comprising the following layers:
 - **WARN:** Potentially harmful situations.
 - **ERROR:** Error events that might still allow the application to continue running.
 
- 
+ ## API Documentation
 
+To view this project API Documentation
+
+```bash
+  https://documenter.getpostman.com/view/35385442/2sA3s1nX8W
+```
  
