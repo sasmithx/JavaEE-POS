@@ -72,4 +72,6 @@ To view this project API Documentation
 ```bash
   https://documenter.getpostman.com/view/35385442/2sA3s1nX8W
 ```
- 
+
+## License
+This project is licensed under the MIT License - see the [MIT License](LICENSE) file for details. 
