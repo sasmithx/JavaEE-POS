@@ -72,6 +72,7 @@ To view this project API Documentation
 ```bash
   https://documenter.getpostman.com/view/35385442/2sA3s1nX8W
 ```
+Refer to the [Postman API Documentation](https://documenter.getpostman.com/view/35385442/2sA3s1nX8W) for detailed API endpoints and usage instructions.
 
 ## <img src="https://user-images.githubusercontent.com/74038190/216122069-5b8169d7-1d8e-4a13-b245-a8e4176c99f8.png" style="width: 50px; height: 50px;" alt="">License
 This project is licensed under the MIT License - see the [MIT License](LICENSE) file for details. 
