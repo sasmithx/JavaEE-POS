@@ -65,7 +65,7 @@ The application follows a layered architecture comprising the following layers:
 - **WARN:** Potentially harmful situations.
 - **ERROR:** Error events that might still allow the application to continue running.
 
- ## API Documentation
+ ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Robot.png" style="width: 50px; height: 50px;" alt="">API Documentation
 
 To view this project API Documentation
 
