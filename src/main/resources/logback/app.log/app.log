@@ -9,3 +9,31 @@
 18:06:48.948 [http-nio-8080-exec-3] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@4e12aa93
 18:07:41.071 [http-nio-8080-exec-8] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Saved Successfully
 18:12:12.683 [http-nio-8080-exec-1] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@e987529
+14:16:59.395 [http-nio-8080-exec-9] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@630ec4a2
+14:17:36.697 [http-nio-8080-exec-8] INFO  l.i.g.javaeepos.api.CustomerServlet - Customer saved successfully
+14:17:45.666 [http-nio-8080-exec-10] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@630ec4a2
+14:18:11.593 [http-nio-8080-exec-1] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Saved Successfully
+14:18:35.003 [http-nio-8080-exec-3] DEBUG l.i.g.javaeepos.api.OrderServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@630ec4a2
+14:18:54.640 [http-nio-8080-exec-5] INFO  l.i.g.javaeepos.api.OrderServlet - Order created
+14:21:25.061 [http-nio-8080-exec-3] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@c4c2f5a
+14:21:25.099 [http-nio-8080-exec-3] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@c4c2f5a
+14:21:26.281 [http-nio-8080-exec-1] DEBUG l.i.g.javaeepos.api.OrderServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@c4c2f5a
+14:22:00.668 [http-nio-8080-exec-6] INFO  l.i.g.javaeepos.api.CustomerServlet - Customer saved successfully
+14:22:39.752 [http-nio-8080-exec-4] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Saved Successfully
+14:23:35.946 [http-nio-8080-exec-6] INFO  l.i.g.javaeepos.api.OrderServlet - Order created
+10:50:47.104 [http-nio-8080-exec-4] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@745da063
+10:50:54.073 [http-nio-8080-exec-2] INFO  l.i.g.javaeepos.api.CustomerServlet - Customer saved successfully
+11:00:50.858 [http-nio-8080-exec-7] INFO  l.i.g.javaeepos.api.CustomerServlet - Customer updated successfully
+11:41:38.169 [http-nio-8080-exec-1] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@745da063
+11:41:38.199 [http-nio-8080-exec-1] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Saved Successfully
+12:20:30.702 [http-nio-8080-exec-3] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Updated Successfully
+12:23:41.939 [http-nio-8080-exec-6] ERROR l.i.gdse68.javaeepos.api.ItemServlet - Error While Deleting Item
+12:28:21.621 [http-nio-8080-exec-8] INFO  l.i.gdse68.javaeepos.api.ItemServlet - Item Deleted Successfully
+12:36:33.081 [http-nio-8080-exec-3] DEBUG l.i.g.javaeepos.api.OrderServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@745da063
+12:36:33.155 [http-nio-8080-exec-3] ERROR l.i.g.javaeepos.api.OrderServlet - Error While processing Transaction
+12:39:05.256 [http-nio-8080-exec-6] ERROR l.i.g.javaeepos.api.OrderServlet - Error While processing Transaction
+12:39:06.705 [http-nio-8080-exec-8] ERROR l.i.g.javaeepos.api.OrderServlet - Error While processing Transaction
+12:42:15.689 [http-nio-8080-exec-1] ERROR l.i.g.javaeepos.api.OrderServlet - Error While processing Transaction
+12:43:50.648 [http-nio-8080-exec-4] ERROR l.i.g.javaeepos.api.OrderServlet - Error While processing Transaction
+12:49:36.223 [http-nio-8080-exec-7] ERROR l.i.gdse68.javaeepos.api.ItemServlet - Error While Deleting Item
+13:35:38.728 [http-nio-8080-exec-4] DEBUG l.i.g.j.api.OrderDetailServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@745da063
