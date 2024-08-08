@@ -75,3 +75,9 @@ To view this project API Documentation
 
 ## License
 This project is licensed under the MIT License - see the [MIT License](LICENSE) file for details. 
+
+<br>
+
+<p align="center">
+  &copy; 2024 Sasmith Manawadu
+</p>
