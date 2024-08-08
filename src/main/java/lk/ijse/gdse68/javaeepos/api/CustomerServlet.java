@@ -55,6 +55,7 @@ public class CustomerServlet extends HttpServlet {
                 Jsonb jsonb = JsonbBuilder.create();
                 String json = jsonb.toJson(customerDTOList);
                 resp.getWriter().write(json);
+                resp.getWriter().write("customer loaded successfully");
             } catch (JsonbException e) {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             } catch (IOException e) {
@@ -106,6 +107,7 @@ public class CustomerServlet extends HttpServlet {
             if(isSaved){
                 logger.info("Customer saved successfully");
                 resp.setStatus(HttpServletResponse.SC_CREATED);
+                resp.getWriter().write("customer saved successfully");
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to save customer");
             }
@@ -164,6 +166,7 @@ public class CustomerServlet extends HttpServlet {
             boolean isDeleted = customerBO.removeCustomer(connection, id);
             if(isDeleted){
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                resp.getWriter().write("customer deleted successfully");
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to delete customer");
             }
