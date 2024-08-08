@@ -56,7 +56,7 @@ The application follows a layered architecture comprising the following layers:
 
 - Example configuration for Tomcat:
 
-<img src="https://github.com/sasmithx/JavaEE-POS/blob/main/Screenshot/xml.png" width="600px" height="auto">
+<img src="https://github.com/sasmithx/JavaEE-POS/blob/main/Screenshot/DBConfig.png" width="600px" height="auto">
 
 ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/High%20Voltage.png" style="width: 50px; height: 50px;" alt="">Logging
 
@@ -65,6 +65,19 @@ The application follows a layered architecture comprising the following layers:
 - **WARN:** Potentially harmful situations.
 - **ERROR:** Error events that might still allow the application to continue running.
 
- 
+ ## <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Robot.png" style="width: 50px; height: 50px;" alt="">API Documentation
 
- 
+To view this project API Documentation
+
+```bash
+  https://documenter.getpostman.com/view/35385442/2sA3s1nX8W
+```
+
+## License
+This project is licensed under the MIT License - see the [MIT License](LICENSE) file for details. 
+
+<br>
+
+<p align="center">
+  &copy; 2024 Sasmith Manawadu
+</p>
