@@ -64,3 +64,10 @@
 07:43:04.162 [http-nio-8080-exec-4] DEBUG l.i.g.javaeepos.api.OrderServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@76c82867
 07:43:04.174 [http-nio-8080-exec-4] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@76c82867
 07:43:04.178 [http-nio-8080-exec-1] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@76c82867
+07:49:29.262 [http-nio-8080-exec-5] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@5988207
+07:49:29.282 [http-nio-8080-exec-5] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@5988207
+07:49:30.180 [http-nio-8080-exec-5] DEBUG l.i.g.javaeepos.api.OrderServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@5988207
+07:49:29.262 [http-nio-8080-exec-5] DEBUG l.i.g.javaeepos.api.CustomerServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@5988207
+07:49:29.282 [http-nio-8080-exec-5] DEBUG l.i.gdse68.javaeepos.api.ItemServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@5988207
+07:49:30.180 [http-nio-8080-exec-5] DEBUG l.i.g.javaeepos.api.OrderServlet - DB Connection Initialized: org.apache.tomcat.dbcp.dbcp2.BasicDataSource@5988207
+07:55:21.398 [http-nio-8080-exec-8] INFO  l.i.g.javaeepos.api.OrderServlet - Order created

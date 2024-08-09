@@ -147,9 +147,11 @@ public class CustomerServlet extends HttpServlet {
                 logger.info("Customer updated successfully");
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }else{
+                logger.error("Failed to update customer");
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to update customer");
             }
         }catch (SQLIntegrityConstraintViolationException e) {
+            logger.error("Duplicate values. Please check again");
             resp.sendError(HttpServletResponse.SC_CONFLICT, "Duplicate values. Please check again");
         }catch (Exception e) {
             e.printStackTrace();
@@ -166,8 +168,10 @@ public class CustomerServlet extends HttpServlet {
             if(isDeleted){
                 resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 resp.getWriter().write("customer deleted successfully");
+                logger.info("Customer deleted successfully");
             }else{
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "failed to delete customer");
+                logger.error("Failed to delete customer");
             }
         } catch (Exception e) {
             e.printStackTrace();
