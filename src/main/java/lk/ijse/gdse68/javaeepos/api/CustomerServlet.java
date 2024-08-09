@@ -55,7 +55,6 @@ public class CustomerServlet extends HttpServlet {
                 Jsonb jsonb = JsonbBuilder.create();
                 String json = jsonb.toJson(customerDTOList);
                 resp.getWriter().write(json);
-                resp.getWriter().write("customer loaded successfully");
             } catch (JsonbException e) {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
             } catch (IOException e) {
